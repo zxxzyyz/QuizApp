@@ -44,3 +44,17 @@
 ### ログ機能
 
 > 何かしら問題や不具合が発生した際に調査に必要な情報を出力する。
+
+## 設計
+
+### ドメインモデル
+
+> 会員=User クイズ=Quiz 選択肢=Choice
+>
+> 会員は複数のクイズを登録することができる。各クイズには一つ以上の選択肢がある。
+
+![image](https://user-images.githubusercontent.com/52019293/205580221-654f49e8-1aca-41f1-95b2-6765e5dae97b.png)
+
+### テーブル定義
+
+![image](https://user-images.githubusercontent.com/52019293/205616438-e983bde5-4ffa-4953-ab95-0019cc4d57ed.png)
