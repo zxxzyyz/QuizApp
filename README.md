@@ -57,4 +57,4 @@
 
 ### テーブル定義
 
-![image](https://user-images.githubusercontent.com/52019293/205616438-e983bde5-4ffa-4953-ab95-0019cc4d57ed.png)
+![image](https://user-images.githubusercontent.com/52019293/206209689-4b75e93a-28ae-46e1-a840-b01a82a437b0.png)

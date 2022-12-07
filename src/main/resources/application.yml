@@ -20,3 +20,10 @@ logging:
     org.hibernate.sql: info
     #org.hibernate.type: trace
     root: info
+
+security:
+  access-token:
+    secret-key: abcdefghijklmnopqrstuvwxyz0123456789
+    life-time: 86400000
+  refresh-token:
+    life-time: 86400000
