@@ -20,7 +20,7 @@ public class AuthController {
 
     private final RefreshTokenCookieProvider refreshTokenCookieProvider;
 
-    public AuthController(AuthService authService, RefreshTokenCookieProvider refreshTokenCookieProvider) {
+    public AuthController(final AuthService authService, final RefreshTokenCookieProvider refreshTokenCookieProvider) {
         this.authService = authService;
         this.refreshTokenCookieProvider = refreshTokenCookieProvider;
     }

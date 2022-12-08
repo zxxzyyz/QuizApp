@@ -1,6 +1,6 @@
-package portfolio.quizapp.application.User;
+package portfolio.quizapp.application.auth;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import portfolio.quizapp.exception.badrequest.NoPasswordException;
 import portfolio.quizapp.exception.internalserver.AlgorithmNotSupportedException;
 
@@ -10,11 +10,11 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class QuizAppEncoder implements PasswordEncoder {
+@Component
+public class QuizAppEncoder {
 
     private final String algorithm = "SHA3-256";
 
-    @Override
     public String encode(final CharSequence rawPassword) {
         try {
             if (rawPassword == null) {
@@ -34,7 +34,6 @@ public class QuizAppEncoder implements PasswordEncoder {
         }
     }
 
-    @Override
     public boolean matches(final CharSequence rawPassword, final String encodedPassword) {
         return encode(rawPassword).equals(encodedPassword);
     }

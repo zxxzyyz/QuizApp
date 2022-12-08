@@ -1,6 +1,5 @@
 package portfolio.quizapp.application.auth;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import portfolio.quizapp.application.auth.token.JwtProvider;
@@ -20,7 +19,7 @@ public class AuthService {
 
     private final UserRepository userRepository;
 
-    private final PasswordEncoder passwordEncoder;
+    private final QuizAppEncoder passwordEncoder;
 
     private final JwtProvider jwtProvider;
 
@@ -28,7 +27,7 @@ public class AuthService {
 
     private final RefreshTokenProvider refreshTokenProvider;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtProvider jwtProvider, RefreshTokenRepository refreshTokenRepository, RefreshTokenProvider refreshTokenProvider) {
+    public AuthService(UserRepository userRepository, QuizAppEncoder passwordEncoder, JwtProvider jwtProvider, RefreshTokenRepository refreshTokenRepository, RefreshTokenProvider refreshTokenProvider) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtProvider = jwtProvider;
@@ -48,6 +47,6 @@ public class AuthService {
         final RefreshToken refreshToken = refreshTokenProvider.createRefreshToken(user.getId());
         refreshTokenRepository.save(refreshToken);
 
-        return LoginResult.from(refreshToken, accessToken, user);
+        return LoginResult.from(accessToken, refreshToken.getTokenValue(), user);
     }
 }

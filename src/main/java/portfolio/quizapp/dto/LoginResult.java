@@ -2,7 +2,6 @@ package portfolio.quizapp.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import portfolio.quizapp.domain.token.RefreshToken;
 import portfolio.quizapp.domain.user.Role;
 import portfolio.quizapp.domain.user.User;
 
@@ -10,9 +9,9 @@ import portfolio.quizapp.domain.user.User;
 @Getter
 public class LoginResult {
 
-    private String refreshToken;
-
     private String accessToken;
+
+    private String refreshToken;
 
     private Long userId;
 
@@ -20,10 +19,10 @@ public class LoginResult {
 
     private Role role;
 
-    public static LoginResult from(final RefreshToken refreshToken, final String accessToken, final User user) {
+    public static LoginResult from(final String accessToken, final String refreshToken, final User user) {
         return LoginResult.builder()
-                .refreshToken(refreshToken.getTokenValue())
                 .accessToken(accessToken)
+                .refreshToken(refreshToken)
                 .userId(user.getId())
                 .username(user.getUsername())
                 .role(user.getRole())
