@@ -1,5 +1,8 @@
 package portfolio.quizapp.exception;
 
+import lombok.Getter;
+
+@Getter
 public class QuizAppException extends RuntimeException {
 
     private final ErrorCode errorCode;

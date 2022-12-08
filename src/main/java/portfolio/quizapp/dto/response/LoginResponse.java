@@ -20,9 +20,9 @@ public class LoginResponse {
     public static LoginResponse of(final LoginResult loginResult) {
         return LoginResponse.builder()
                 .accessToken(loginResult.getAccessToken())
-                .userId(loginResult.getUserId())
-                .username(loginResult.getUsername())
-                .role(loginResult.getRole())
+                .userId(loginResult.getUser().getId())
+                .username(loginResult.getUser().getUsername())
+                .role(loginResult.getUser().getRole())
                 .build();
     }
 }
