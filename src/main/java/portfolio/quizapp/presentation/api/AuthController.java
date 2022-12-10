@@ -40,7 +40,7 @@ public class AuthController {
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(
             @CookieValue(value = RefreshTokenCookieProvider.REFRESH_TOKEN, required = false) final String refreshToken) {
-        if (refreshToken != null) throw new NoRefreshTokenException();
+        if (refreshToken == null) throw new NoRefreshTokenException();
         return ResponseEntity.noContent()
                 .header(HttpHeaders.SET_COOKIE, refreshTokenCookieProvider.createExpiredCookie().toString())
                 .build();
