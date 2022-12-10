@@ -28,9 +28,10 @@ public class AuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         HandlerMethod hm = (HandlerMethod) handler;
         Login auth = hm.getMethodAnnotation(Login.class);
-        if (!(handler instanceof HandlerMethod)) return true;
 
-        if (auth == null) return true;
+        if (!(handler instanceof HandlerMethod) || auth == null) {
+            return true;
+        }
         String authHeader = request.getHeader(AUTHORIZATION);
 
         if (request.getHeader(AUTHORIZATION) != null) {
