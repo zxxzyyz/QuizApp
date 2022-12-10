@@ -3,6 +3,7 @@ package portfolio.quizapp.presentation.api;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import portfolio.quizapp.application.auth.token.RefreshTokenCookieProvider;
 import portfolio.quizapp.dto.request.LoginRequest;
 import portfolio.quizapp.dto.LoginResult;
 import portfolio.quizapp.dto.response.LoginResponse;
+import portfolio.quizapp.exception.unauthorized.NoRefreshTokenException;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -33,5 +35,14 @@ public class AuthController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, cookie.toString())
                 .body(LoginResponse.of(loginResult));
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(
+            @CookieValue(value = RefreshTokenCookieProvider.REFRESH_TOKEN, required = false) final String refreshToken) {
+        if (refreshToken != null) throw new NoRefreshTokenException();
+        return ResponseEntity.noContent()
+                .header(HttpHeaders.SET_COOKIE, refreshTokenCookieProvider.createExpiredCookie().toString())
+                .build();
     }
 }
