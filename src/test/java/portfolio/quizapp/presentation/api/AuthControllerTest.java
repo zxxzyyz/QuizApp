@@ -1,14 +1,19 @@
 package portfolio.quizapp.presentation.api;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseCookie;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import portfolio.quizapp.domain.user.User;
 import portfolio.quizapp.dto.LoginResult;
 import portfolio.quizapp.dto.request.LoginRequest;
 import portfolio.quizapp.exception.badrequest.InvalidPasswordException;
+import portfolio.quizapp.exception.unauthorized.NoRefreshTokenException;
 import portfolio.quizapp.predefinition.fixture.UserFixture;
 import portfolio.quizapp.presentation.PresentationTest;
+
+import javax.servlet.http.Cookie;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.BDDMockito.*;
@@ -65,6 +70,41 @@ class AuthControllerTest extends PresentationTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("message").value(message))
                 .andDo(print());
+    }
 
+    @Test
+    void Logout_成功() throws Exception {
+        // given
+        given(refreshTokenCookieProvider.createExpiredCookie())
+                .willReturn(ResponseCookie.from("RefreshToken", "RefreshTokenValue").build());
+
+        //when
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/logout")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .cookie(new Cookie("RefreshToken", "RefreshTokenValue")))
+                .andDo(print());
+
+        //then
+        resultActions.andExpect(status().isNoContent());
+    }
+
+    @Test
+    void Logout_NoRefreshToken() throws Exception {
+        //given
+        String message;
+        try {
+            throw new NoRefreshTokenException();
+        } catch (Exception exception) {
+            message = exception.getMessage();
+        }
+
+        //when
+        ResultActions resultActions = postJson("/api/v1/logout");
+
+        //then
+        resultActions
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("message").value(message))
+                .andDo(print());
     }
 }

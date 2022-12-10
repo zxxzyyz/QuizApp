@@ -45,4 +45,10 @@ public class PresentationTest {
                         .contentType(objectMapper.writeValueAsString(body)))
                 .andDo(print());
     }
+
+    protected ResultActions postJson(String uri) throws Exception {
+        return mockMvc.perform(post(uri)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print());
+    }
 }
