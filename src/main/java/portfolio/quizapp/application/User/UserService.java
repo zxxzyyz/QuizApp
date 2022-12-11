@@ -7,7 +7,9 @@ import portfolio.quizapp.domain.user.Role;
 import portfolio.quizapp.domain.user.User;
 import portfolio.quizapp.domain.user.UserRepository;
 import portfolio.quizapp.dto.request.UserCreateRequest;
+import portfolio.quizapp.dto.response.UserResponse;
 import portfolio.quizapp.exception.badrequest.DuplicateUserException;
+import portfolio.quizapp.exception.notfound.UserNotFoundException;
 
 @Service
 @Transactional(readOnly = true)
@@ -36,9 +38,14 @@ public class UserService {
         return userRepository.save(user).getId();
     }
 
-    private void badRequestIfUserExist(String username) {
+    private void badRequestIfUserExist(final String username) {
         userRepository.findByUsername(username).ifPresent(user -> {
             throw new DuplicateUserException(user.getUsername());
         });
+    }
+
+    public UserResponse find(final Long userId) {
+        final User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        return UserResponse.from(user);
     }
 }
