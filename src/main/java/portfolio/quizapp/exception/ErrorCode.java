@@ -14,7 +14,6 @@ public enum ErrorCode {
 
     INVALID_FORMAT_ACCESS_TOKEN("401-020"),
 
-
     PERMISSION_DENIED("403-010"),
 
     USER_NOT_FOUND("404-010"),

@@ -3,6 +3,7 @@ package portfolio.quizapp.presentation.api;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.ResultActions;
 import portfolio.quizapp.dto.request.UserCreateRequest;
+import portfolio.quizapp.predefinition.fixture.UserFixture;
 import portfolio.quizapp.presentation.PresentationTest;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -19,8 +20,8 @@ class UserControllerTest extends PresentationTest {
     void 会員登録() throws Exception {
         //given
         Long userId = 1L;
-        UserCreateRequest userCreateRequest = new UserCreateRequest("koo", "1234");
-        given(userService.saveUser(any(UserCreateRequest.class))).willReturn(userId);
+        UserCreateRequest userCreateRequest = UserFixture.KOO.toCreateRequest();
+        given(userService.save(any(UserCreateRequest.class))).willReturn(userId);
 
         //when
         ResultActions resultActions = postJson("/api/v1/users", userCreateRequest);

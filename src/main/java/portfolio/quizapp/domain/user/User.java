@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import portfolio.quizapp.domain.BaseTimeEntity;
-import portfolio.quizapp.dto.request.UserCreateRequest;
 
 import javax.persistence.*;
 
@@ -37,14 +36,38 @@ public class User extends BaseTimeEntity {
         this.role = role;
     }
 
-    public static User from(
-            final UserCreateRequest userCreateRequest,
+    public static User of(
+            final String username,
             final String encryptedPassword,
             final Role role) {
         return User.builder()
-                .username(userCreateRequest.getUsername())
+                .username(username)
                 .password(encryptedPassword)
                 .role(role)
                 .build();
+    }
+
+    public void update(final User user) {
+        updateUsername(user.getUsername());
+        updatePassword(user.getPassword());
+        updateRole(user.getRole());
+    }
+
+    private void updateUsername(final String username) {
+        if (username != null) {
+            this.username = username;
+        }
+    }
+
+    private void updatePassword(final String password) {
+        if (password != null) {
+            this.password = password;
+        }
+    }
+
+    private void updateRole(final Role role) {
+        if (username != null) {
+            this.username = username;
+        }
     }
 }

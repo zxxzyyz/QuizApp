@@ -2,6 +2,7 @@ package portfolio.quizapp.predefinition.fixture;
 
 import portfolio.quizapp.domain.user.Role;
 import portfolio.quizapp.domain.user.User;
+import portfolio.quizapp.dto.request.UserCreateRequest;
 
 import static portfolio.quizapp.domain.user.Role.*;
 
@@ -29,6 +30,13 @@ public enum UserFixture {
 
     public User 生成(final Long id) {
         return buildUser(id).build();
+    }
+
+    public UserCreateRequest toCreateRequest() {
+        return UserCreateRequest.builder()
+                .username(username)
+                .password(password)
+                .build();
     }
 
     private User.UserBuilder buildUser(final Long id) {
