@@ -7,9 +7,9 @@ import portfolio.quizapp.exception.QuizAppException;
 @Getter
 public class ExceptionResponse {
 
-    private final ErrorCode errorCode;
+    private ErrorCode errorCode;
 
-    private final String message;
+    private String message;
 
     public ExceptionResponse(final ErrorCode errorCode, final String message) {
         this.errorCode = errorCode;

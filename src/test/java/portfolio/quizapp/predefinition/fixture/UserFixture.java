@@ -2,7 +2,7 @@ package portfolio.quizapp.predefinition.fixture;
 
 import portfolio.quizapp.domain.user.Role;
 import portfolio.quizapp.domain.user.User;
-import portfolio.quizapp.dto.request.UserCreateRequest;
+import portfolio.quizapp.dto.request.UserRequest;
 
 import static portfolio.quizapp.domain.user.Role.*;
 
@@ -10,7 +10,9 @@ public enum UserFixture {
 
     KOO("Jungmin", "1234", ADMIN),
 
-    ANDO("Yurika", "5678", USER);
+    ANDO("Yurika", "5678", USER),
+
+    SMITH("John", "0000", USER);
 
     private final String username;
 
@@ -32,10 +34,11 @@ public enum UserFixture {
         return buildUser(id).build();
     }
 
-    public UserCreateRequest toCreateRequest() {
-        return UserCreateRequest.builder()
+    public UserRequest toCreateRequest() {
+        return UserRequest.builder()
                 .username(username)
                 .password(password)
+                .role(role)
                 .build();
     }
 

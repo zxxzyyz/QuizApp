@@ -66,8 +66,8 @@ public class User extends BaseTimeEntity {
     }
 
     private void updateRole(final Role role) {
-        if (username != null) {
-            this.username = username;
+        if (role != null) {
+            this.role = role;
         }
     }
 }
