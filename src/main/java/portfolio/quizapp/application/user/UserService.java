@@ -1,4 +1,4 @@
-package portfolio.quizapp.application.User;
+package portfolio.quizapp.application.user;
 
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;

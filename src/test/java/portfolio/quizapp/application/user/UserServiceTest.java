@@ -1,4 +1,4 @@
-package portfolio.quizapp.application.User;
+package portfolio.quizapp.application.user;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import portfolio.quizapp.application.auth.token.UserPayload;
 import portfolio.quizapp.domain.user.Role;
-import portfolio.quizapp.domain.user.User;
 import portfolio.quizapp.dto.request.UserRequest;
 import portfolio.quizapp.dto.response.UserResponse;
 import portfolio.quizapp.exception.Forbidden.NotAdminException;

@@ -7,7 +7,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import portfolio.quizapp.application.User.UserService;
+import portfolio.quizapp.application.user.UserService;
 import portfolio.quizapp.application.auth.AuthService;
 import portfolio.quizapp.application.auth.token.JwtProvider;
 import portfolio.quizapp.application.auth.token.RefreshTokenCookieProvider;

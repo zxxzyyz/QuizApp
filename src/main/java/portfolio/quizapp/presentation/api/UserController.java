@@ -4,7 +4,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
-import portfolio.quizapp.application.User.UserService;
+import portfolio.quizapp.application.user.UserService;
 import portfolio.quizapp.application.auth.token.RefreshTokenCookieProvider;
 import portfolio.quizapp.application.auth.token.UserPayload;
 import portfolio.quizapp.dto.request.UserRequest;
